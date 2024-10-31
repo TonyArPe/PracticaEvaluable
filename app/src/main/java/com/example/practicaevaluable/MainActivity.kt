@@ -25,6 +25,14 @@ class MainActivity : AppCompatActivity() {
 
         sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
 
+        // Botón de Configuracion de Llamadas
+        val configButton = findViewById<Button>(R.id.configButton)
+        configButton.setOnClickListener {
+            val configIntent = Intent(this, Configuracion::class.java)
+            startActivity(configIntent)
+        }
+
+
         // Botón de abrir URL
         val urlButton = findViewById<Button>(R.id.urlButton)
         urlButton.setOnClickListener {

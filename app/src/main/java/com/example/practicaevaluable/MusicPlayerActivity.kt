@@ -24,11 +24,15 @@ class MusicPlayerActivity : AppCompatActivity() {
         val backButton = findViewById<Button>(R.id.backButton)
 
         playButton.setOnClickListener {
-            mediaPlayer.start()
+            if (!mediaPlayer.isPlaying) {
+                mediaPlayer.start()
+            }
         }
 
         pauseButton.setOnClickListener {
-            mediaPlayer.pause()
+            if (mediaPlayer.isPlaying) {
+                mediaPlayer.pause()
+            }
         }
 
         nextButton.setOnClickListener {
@@ -46,17 +50,29 @@ class MusicPlayerActivity : AppCompatActivity() {
         }
 
         backButton.setOnClickListener {
-            mediaPlayer.stop()
+            if (this::mediaPlayer.isInitialized && mediaPlayer.isPlaying) {
+                mediaPlayer.stop()
+            }
             mediaPlayer.release()
             finish()
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        if (mediaPlayer.isPlaying) {
+        if (this::mediaPlayer.isInitialized && mediaPlayer.isPlaying) {
             mediaPlayer.stop()
         }
-        mediaPlayer.release()
+        if (this::mediaPlayer.isInitialized) {
+            mediaPlayer.release()
+        }
     }
+
 }
