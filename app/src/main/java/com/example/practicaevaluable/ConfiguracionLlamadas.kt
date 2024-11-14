@@ -7,7 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class Configuracion : AppCompatActivity() {
+class ConfiguracionLlamadas : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var phoneNumberEditText: EditText

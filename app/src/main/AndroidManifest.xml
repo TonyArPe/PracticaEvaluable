@@ -23,7 +23,7 @@
             android:name=".Llamadas"
             android:exported="false" />
         <activity
-            android:name=".Configuracion"
+            android:name=".ConfiguracionLlamadas"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

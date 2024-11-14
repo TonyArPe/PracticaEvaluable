@@ -56,6 +56,10 @@ class MusicPlayerActivity : AppCompatActivity() {
             mediaPlayer.release()
             finish()
         }
+
+        backButton.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onPause() {

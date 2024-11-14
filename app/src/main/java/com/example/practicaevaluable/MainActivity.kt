@@ -2,7 +2,6 @@ package com.example.practicaevaluable
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.widget.Button
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         // Botón de Configuracion de Llamadas
         val configButton = findViewById<Button>(R.id.configButton)
         configButton.setOnClickListener {
-            val configIntent = Intent(this, Configuracion::class.java)
+            val configIntent = Intent(this, ConfiguracionLlamadas::class.java)
             startActivity(configIntent)
         }
 
