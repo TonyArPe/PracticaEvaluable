@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.practicaevaluable.databinding.ActivityConfigBinding
 
 class ConfigActivity : AppCompatActivity() {
@@ -18,7 +15,12 @@ class ConfigActivity : AppCompatActivity() {
         binding = ActivityConfigBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Configurar el Spinner
+        // Botón para regresar al juego
+        binding.buttonBack.setOnClickListener {
+            finish()
+        }
+
+        // Configuración del Spinner de tiempo
         binding.spinnerTiempo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val tiempoSeleccionado = parent.getItemAtPosition(position).toString()
@@ -28,13 +30,39 @@ class ConfigActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        // Configurar el ToggleButton
+        // Configuración del ToggleButton
         binding.toggleButton.setOnCheckedChangeListener { _, isChecked ->
             val estado = if (isChecked) "Activado" else "Desactivado"
             Toast.makeText(this, "ToggleButton: $estado", Toast.LENGTH_SHORT).show()
         }
 
-        // Configura los RadioButtons y CheckBoxes si es necesario
+        // Configuración del RadioGroup para opciones
+        binding.radioGroupOpciones.setOnCheckedChangeListener { group, checkedId ->
+            val opcionSeleccionada = when (checkedId) {
+                binding.radioOpcion1.id -> "Opción 1"
+                binding.radioOpcion2.id -> "Opción 2"
+                else -> ""
+            }
+            Toast.makeText(this, "RadioButton seleccionado: $opcionSeleccionada", Toast.LENGTH_SHORT).show()
+        }
+
+        // Configuración de los CheckBoxes
+        binding.checkOpcion1.setOnCheckedChangeListener { _, isChecked ->
+            val mensaje = if (isChecked) "CheckBox 1 activado" else "CheckBox 1 desactivado"
+            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+        }
+
+        binding.checkOpcion2.setOnCheckedChangeListener { _, isChecked ->
+            val mensaje = if (isChecked) "CheckBox 2 activado" else "CheckBox 2 desactivado"
+            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+        }
+
+        // Configuración del EditText
+        binding.editTextDatos.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val textoIngresado = binding.editTextDatos.text.toString()
+                Toast.makeText(this, "Texto agregado: $textoIngresado", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
-

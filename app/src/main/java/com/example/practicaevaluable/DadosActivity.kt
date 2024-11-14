@@ -1,10 +1,10 @@
 package com.example.practicaevaluable
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.practicaevaluable.databinding.ActivityDadosBinding
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -19,6 +19,17 @@ class DadosActivity : AppCompatActivity() {
         binding = ActivityDadosBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initEvent()
+
+        // Botón para regresar al MainActivity
+        binding.buttonBackMain.setOnClickListener {
+            finish() // Finaliza DadosActivity y regresa al MainActivity
+        }
+
+        // Botón para abrir ConfigActivity
+        binding.buttonConfig.setOnClickListener {
+            val configIntent = Intent(this, ConfigActivity::class.java)
+            startActivity(configIntent)
+        }
     }
 
     private fun initEvent() {
@@ -82,5 +93,3 @@ class DadosActivity : AppCompatActivity() {
         binding.txtResultado.text = sum.toString()
     }
 }
-
-
