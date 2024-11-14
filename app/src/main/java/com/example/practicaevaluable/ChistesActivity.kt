@@ -2,6 +2,7 @@ package com.example.practicaevaluable
 
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -42,6 +43,11 @@ class ChistesActivity : AppCompatActivity() {
             val chisteAleatorio = chistes.random()
             binding.textViewChiste.text = chisteAleatorio
             tts.speak(chisteAleatorio, TextToSpeech.QUEUE_FLUSH, null, "")
+        }
+
+        val backButton = findViewById<Button>(R.id.backButton)
+        backButton.setOnClickListener {
+            finish()
         }
     }
 

@@ -38,13 +38,13 @@
         android:id="@+id/checkOpcion1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check opción 1" />
+        android:text="Comprobar Opcion 1" />
 
     <CheckBox
         android:id="@+id/checkOpcion2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check opción 2" />
+        android:text="Comprobar Opción 2" />
 
     <ToggleButton
         android:id="@+id/toggleButton"

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.AlarmClock
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -15,36 +14,35 @@ import android.content.pm.PackageManager
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import com.example.practicaevaluable.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
     private lateinit var sharedPreferences: SharedPreferences
     private val REQUEST_CALL_PERMISSION = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
 
-        // Botón de Configuracion de Llamadas
-        val configButton = findViewById<Button>(R.id.configButton)
-        configButton.setOnClickListener {
+        // Botón de Configuración de Llamadas
+        binding.configButton.setOnClickListener {
             val configIntent = Intent(this, ConfiguracionLlamadas::class.java)
             startActivity(configIntent)
         }
 
-
         // Botón de abrir URL
-        val urlButton = findViewById<Button>(R.id.urlButton)
-        urlButton.setOnClickListener {
+        binding.urlButton.setOnClickListener {
             val urlIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.es/"))
             startActivity(urlIntent)
         }
 
         // Botón de crear alarma
-        val alarmButton = findViewById<Button>(R.id.alarmButton)
-        alarmButton.setOnClickListener {
+        binding.alarmButton.setOnClickListener {
             val alarmIntent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
                 putExtra(AlarmClock.EXTRA_MESSAGE, "Alarma Personalizada")
                 putExtra(AlarmClock.EXTRA_HOUR, 0)
@@ -55,17 +53,33 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Botón de abrir reproductor de música
-        val musicPlayerButton = findViewById<Button>(R.id.musicPlayerButton)
-        musicPlayerButton.setOnClickListener {
+        binding.musicPlayerButton.setOnClickListener {
             val intent = Intent(this, MusicPlayerActivity::class.java)
             startActivity(intent)
         }
 
         // Botón de llamada telefónica
-        val callButton = findViewById<Button>(R.id.callButton)
-        callButton.setOnClickListener {
+        binding.callButton.setOnClickListener {
             makePhoneCall()
         }
+
+        // Acceso a ChistesActivity
+        binding.buttonVerChistes.setOnClickListener {
+            val intent = Intent(this, ChistesActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Acceso a DadosActivity
+        binding.buttonJugarDados.setOnClickListener {
+            val intent = Intent(this, DadosActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Mostrar el ProgressBar durante 2 segundos
+        binding.progressBar.visibility = View.VISIBLE
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.progressBar.visibility = View.GONE
+        }, 2000)
     }
 
     private fun makePhoneCall() {
@@ -79,28 +93,5 @@ class MainActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "No se ha configurado un número de teléfono", Toast.LENGTH_SHORT).show()
         }
-
-        // LOGICA NUEVA DE LA PRACTICA EVALUABLE 2
-
-        /*
-        // Acceso a ChistesActivity
-        binding.buttonVerChistes.setOnClickListener {
-            startActivity(Intent(this, ChistesActivity::class.java))
-        }
-
-        // Acceso a DadosActivity
-        binding.buttonJugarDados.setOnClickListener {
-            startActivity(Intent(this, DadosActivity::class.java))
-        }
-
-        // Mostrar el ProgressBar durante 2 segundos
-        binding.progressBar.visibility = View.VISIBLE
-        Handler(Looper.getMainLooper()).postDelayed({
-            binding.progressBar.visibility = View.GONE
-        }, 2000)
-        */
-
     }
-
-
 }

@@ -30,7 +30,7 @@
         android:id="@+id/configButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:backgroundTint="@color/colorPrimary"
         android:text="Configuración Llamadas"
         android:textColor="#FFFFFF"
@@ -59,6 +59,7 @@
         android:layout_marginTop="12dp"
         android:backgroundTint="@color/colorAccent"
         android:text="Abrir Google"
+        android:textColor="#FFFFFF"
         app:icon="@drawable/icons8_chrome_48"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,23 +91,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/alarmButton" />
 
-    <!-- Aqui se incluye el XML nuevo de la practica evaluable 2-->
+    <!--Codigo nuevo para la practica evaluable 2-->
 
     <Button
         android:id="@+id/buttonVerChistes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chistes" />
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#4CAF50"
+        android:text="Chistes"
+        android:textColor="#FFFFFF"
+        app:icon="@mipmap/risa_icon_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/musicPlayerButton" />
 
     <Button
         android:id="@+id/buttonJugarDados"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Juego de Dados" />
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#FFC107"
+        android:text="Juego de Dados"
+        android:textColor="#FFFFFF"
+        app:icon="@drawable/vaso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonVerChistes" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonJugarDados" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
