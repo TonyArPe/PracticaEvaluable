@@ -12,6 +12,9 @@ import androidx.core.content.ContextCompat
 import android.Manifest
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.os.Handler
+import android.os.Looper
+import android.view.View
 
 class MainActivity : AppCompatActivity() {
 
@@ -76,5 +79,28 @@ class MainActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "No se ha configurado un número de teléfono", Toast.LENGTH_SHORT).show()
         }
+
+        // LOGICA NUEVA DE LA PRACTICA EVALUABLE 2
+
+        /*
+        // Acceso a ChistesActivity
+        binding.buttonVerChistes.setOnClickListener {
+            startActivity(Intent(this, ChistesActivity::class.java))
+        }
+
+        // Acceso a DadosActivity
+        binding.buttonJugarDados.setOnClickListener {
+            startActivity(Intent(this, DadosActivity::class.java))
+        }
+
+        // Mostrar el ProgressBar durante 2 segundos
+        binding.progressBar.visibility = View.VISIBLE
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.progressBar.visibility = View.GONE
+        }, 2000)
+        */
+
     }
+
+
 }

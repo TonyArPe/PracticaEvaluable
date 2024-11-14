@@ -16,6 +16,12 @@
         android:theme="@style/Theme.PracticaEvaluable"
         tools:targetApi="31">
         <activity
+            android:name=".ChistesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DadosActivity"
+            android:exported="false" />
+        <activity
             android:name=".ConfigActivity"
             android:exported="false" />
         <activity
