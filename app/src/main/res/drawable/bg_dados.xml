@@ -1,0 +1,27 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fondo oscuro con gradiente -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#37474F"
+                android:endColor="#263238"
+                android:angle="270" />
+        </shape>
+    </item>
+
+    <!-- Patrón de puntos (dados) -->
+    <item>
+        <bitmap
+            android:src="@drawable/pattern_dice"
+            android:tileMode="repeat"
+            android:gravity="center" />
+    </item>
+
+    <!-- Detalle decorativo de línea en la parte superior -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF" />
+            <size android:height="4dp" />
+        </shape>
+    </item>
+</layer-list>

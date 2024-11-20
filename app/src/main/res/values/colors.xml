@@ -6,4 +6,6 @@
     <color name="colorSecondary">#388e3c</color>
     <color name="colorAccent">#1976d2</color>
     <color name="colorPrimaryDark">#1565c0</color>
+    <color name="purple_200">#9C27B0</color>
+    <color name="yellow_300">#FFEB3B</color>
 </resources>

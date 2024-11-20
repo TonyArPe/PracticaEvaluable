@@ -35,11 +35,15 @@ class ChistesActivity : AppCompatActivity() {
         binding = ActivityChistesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Obtener el resultado de los dados
+        val resultadoDados = intent.getIntExtra("resultado_dados", 0)
+        val chiste = obtenerChistePorResultado(resultadoDados)
+
         // Inicializar TextToSpeech
         tts = TextToSpeech(this) { status ->
             if (status == TextToSpeech.SUCCESS) {
-                tts.language = Locale.getDefault()
-                reproducirChiste()
+                tts.language = Locale("es", "ES")
+                reproducirChiste(chiste)
             }
         }
 
@@ -48,10 +52,13 @@ class ChistesActivity : AppCompatActivity() {
         }
     }
 
-    private fun reproducirChiste() {
-        val chisteAleatorio = chistes.random()
-        binding.textViewChiste.text = chisteAleatorio
-        tts.speak(chisteAleatorio, TextToSpeech.QUEUE_FLUSH, null, "")
+    private fun obtenerChistePorResultado(resultado: Int): String {
+        return chistes[resultado % chistes.size] // Selecciona un chiste basado en el resultado
+    }
+
+    private fun reproducirChiste(chiste: String) {
+        binding.textViewChiste.text = chiste
+        tts.speak(chiste, TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
     override fun onDestroy() {

@@ -4,11 +4,8 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.practicaevaluable.databinding.ActivityDadosBinding
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
 class DadosActivity : AppCompatActivity() {
@@ -20,90 +17,46 @@ class DadosActivity : AppCompatActivity() {
         binding = ActivityDadosBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicializar eventos
-        binding.txtResultado.visibility = View.INVISIBLE
         binding.imageButton.setOnClickListener {
-            animateDiceRoll()
+            lanzarDadosAnimacion()
         }
 
-        // Botón para regresar al MainActivity
-        binding.buttonBackMain.setOnClickListener {
-            finish()
-        }
+        binding.buttonBackMain.setOnClickListener { finish() }
 
-        // Botón para abrir ConfigActivity
         binding.buttonConfig.setOnClickListener {
-            val configIntent = Intent(this, ConfigActivity::class.java)
-            startActivity(configIntent)
+            // Redirigir a ConfigActivity
+            val intent = Intent(this, ConfigActivity::class.java)
+            startActivity(intent)
         }
     }
 
-    // Animación del vaso
-    private fun animateDiceRoll() {
-        val animator = ObjectAnimator.ofFloat(binding.imageButton, "translationY", -50f, 50f)
-        animator.duration = 500
-        animator.repeatCount = 3
-        animator.repeatMode = ObjectAnimator.REVERSE
-        animator.start()
+    private fun lanzarDadosAnimacion() {
+        val animacion = ObjectAnimator.ofFloat(binding.imageButton, "rotation", 0f, 360f)
+        animacion.duration = 500
+        animacion.start()
 
-        animator.addListener(object : android.animation.AnimatorListenerAdapter() {
+        animacion.addListener(object : android.animation.AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: android.animation.Animator) {
-                super.onAnimationEnd(animation)
-                scheduleRun() // Llamamos al método para continuar con el lanzamiento de los dados
+                lanzarDados()
+                irAChistesActivity() // Redirigir a ChistesActivity con el resultado
             }
         })
     }
 
-    // Lógica del juego
-    private fun scheduleRun() {
-        val schedulerExecutor = Executors.newSingleThreadScheduledExecutor()
-        val msc = 1000L
-
-        for (i in 1..5) {
-            schedulerExecutor.schedule(
-                { throwDadoInTime() },
-                msc * i, TimeUnit.MILLISECONDS
-            )
+    private fun lanzarDados() {
+        val resultados = List(3) { Random.nextInt(1, 7) }
+        val dados = listOf(binding.imagviewDado1, binding.imagviewDado2, binding.imagviewDado3)
+        resultados.forEachIndexed { index, resultado ->
+            val resId = resources.getIdentifier("dado$resultado", "drawable", packageName)
+            dados[index].setImageResource(resId)
         }
-
-        schedulerExecutor.schedule({
-            viewResult()
-        }, msc * 7, TimeUnit.MILLISECONDS)
-
-        schedulerExecutor.shutdown()
+        sum = resultados.sum()
+        binding.txtResultado.text = "Resultado: $sum"
     }
 
-    private fun throwDadoInTime() {
-        val numDados = Array(3) { Random.nextInt(1, 7) }
-        val imageViews: Array<ImageView> = arrayOf(
-            binding.imagviewDado1,
-            binding.imagviewDado2,
-            binding.imagviewDado3
-        )
-
-        sum = numDados.sum()
-
-        for (i in imageViews.indices)
-            selectView(imageViews[i], numDados[i])
-    }
-
-    private fun selectView(imgV: ImageView, v: Int) {
-        when (v) {
-            1 -> imgV.setImageResource(R.drawable.dado1)
-            2 -> imgV.setImageResource(R.drawable.dado2)
-            3 -> imgV.setImageResource(R.drawable.dado3)
-            4 -> imgV.setImageResource(R.drawable.dado4)
-            5 -> imgV.setImageResource(R.drawable.dado5)
-            6 -> imgV.setImageResource(R.drawable.dado6)
-        }
-    }
-
-    private fun viewResult() {
-        binding.txtResultado.text = sum.toString()
-
-        // Enviar el resultado a ChistesActivity
+    private fun irAChistesActivity() {
         val intent = Intent(this, ChistesActivity::class.java)
-        intent.putExtra("resultadoDados", sum)
+        intent.putExtra("resultado_dados", sum) // Pasar el resultado a ChistesActivity
         startActivity(intent)
     }
 }

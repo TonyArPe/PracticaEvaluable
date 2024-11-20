@@ -1,0 +1,22 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fondo principal con un color base -->
+    <item android:drawable="@color/yellow_300" />
+
+    <!-- Capa ondulada en la parte inferior -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#FFECB3"
+                android:endColor="#FFC107"
+                android:angle="270" />
+            <corners android:radius="40dp" />
+        </shape>
+    </item>
+
+    <!-- Ícono divertido en el centro -->
+    <item>
+        <bitmap
+            android:src="@drawable/risa"
+            android:gravity="center" />
+    </item>
+</layer-list>
