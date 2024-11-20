@@ -6,14 +6,32 @@
     android:padding="16dp"
     android:gravity="center">
 
-    <Button
-        android:id="@+id/imageButton"
+    <!-- Imagen de los dados -->
+
+    <TextView
+        android:id="@+id/txtJugadorNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¡Lanzar los Dados!"
-        android:backgroundTint="#FF5722"
+        android:layout_marginTop="20dp"
+        android:text="Jugador: No asignado"
         android:textColor="#FFFFFF"
-        android:layout_marginBottom="16dp" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/dado_icono"
+        android:background="@android:color/transparent"
+        android:contentDescription="Lanzar dados"
+        android:layout_marginTop="80dp"
+        android:elevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -38,30 +56,65 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="8dp" />
+
     </LinearLayout>
 
+    <!-- Fondo de la activity -->
+
+    <!-- Título de la activity -->
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Juego de Dados"
+        android:textColor="#6B5B5B"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Resultado de los dados -->
     <TextView
         android:id="@+id/txtResultado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Resultado:"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+        android:layout_marginTop="30dp"
+        android:text="Resultado: 0"
+        android:textColor="#6B5B5B"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
-    <!-- Botón para volver al MainActivity -->
+    <!-- Botón de regreso -->
     <Button
         android:id="@+id/buttonBackMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Volver"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Regresar"
+        android:textColor="#FFFFFF"
+        app:icon="@android:drawable/ic_menu_revert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtResultado" />
 
-    <!-- Botón para abrir ConfigActivity -->
+    <!-- Botón de configuración -->
     <Button
         android:id="@+id/buttonConfig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ajustes del Juego"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="Configuración"
+        android:textColor="#FFFFFF"
+        app:icon="@android:drawable/ic_menu_manage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBackMain" />
 </LinearLayout>

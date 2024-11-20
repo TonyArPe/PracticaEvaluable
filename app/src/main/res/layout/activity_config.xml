@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -14,7 +15,7 @@
         android:id="@+id/editTextDatos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Escribe aquí..." />
+        android:hint="Nombre del jugador" />
 
     <RadioGroup
         android:id="@+id/radioGroupOpciones"
@@ -58,6 +59,15 @@
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Volver"
-        android:layout_marginTop="16dp" />
+        app:icon="@android:drawable/ic_menu_revert" />
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Guardar"
+        app:icon="@android:drawable/ic_menu_save" />
 </LinearLayout>

@@ -15,10 +15,32 @@ class ConfigActivity : AppCompatActivity() {
         binding = ActivityConfigBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Guardar el nombre del jugador
+        binding.buttonSave.setOnClickListener {
+            val nombreJugador = binding.editTextDatos.text.toString()
+            if (nombreJugador.isNotEmpty()) {
+                // Guardar el nombre en SharedPreferences
+                val sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                editor.putString("playerName", nombreJugador)
+                editor.apply()
+
+                // Mostrar mensaje de éxito
+                Toast.makeText(this, "Nombre guardado: $nombreJugador", Toast.LENGTH_SHORT).show()
+
+                // Regresar a DadosActivity
+                finish()
+            } else {
+                Toast.makeText(this, "Por favor, ingresa un nombre.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         // Botón para regresar al juego
         binding.buttonBack.setOnClickListener {
             finish()
         }
+
+
 
         // Configuración del Spinner de tiempo
         binding.spinnerTiempo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

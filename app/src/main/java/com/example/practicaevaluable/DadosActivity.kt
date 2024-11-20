@@ -17,6 +17,20 @@ class DadosActivity : AppCompatActivity() {
         binding = ActivityDadosBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Obtener el nombre del jugador desde SharedPreferences
+        val sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
+        val playerName = sharedPreferences.getString("playerName", "Jugador no asignado")
+
+        // Mostrar el nombre del jugador en el TextView
+        binding.txtJugadorNombre.text = "Jugador: $playerName"
+
+        // Configurar los demás botones y funcionalidades de la actividad
+        binding.buttonConfig.setOnClickListener {
+            // Ir a la ConfigActivity para cambiar el nombre del jugador
+            val intent = Intent(this, ConfigActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.imageButton.setOnClickListener {
             lanzarDadosAnimacion()
         }
