@@ -4,33 +4,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/bg_chistes"
     android:padding="16dp">
 
     <TextView
         android:id="@+id/textViewChiste"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Presiona para escuchar un chiste"
+        android:text="Aquí aparecerá tu chiste"
         android:textSize="18sp"
         android:gravity="center"
-        android:layout_marginBottom="16dp" />
-
-    <Button
-        android:id="@+id/buttonChisteAleatorio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contar Chiste" />
+        android:layout_marginBottom="16dp"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/backButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="#757575"
-        android:padding="12dp"
         android:text="Volver"
         android:textColor="#FFFFFF"
-        app:icon="@android:drawable/ic_menu_revert" />
+        android:backgroundTint="#FF5722"
+        android:padding="12dp"
+        android:layout_marginTop="24dp" />
 </LinearLayout>

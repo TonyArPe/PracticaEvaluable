@@ -1,5 +1,6 @@
 package com.example.practicaevaluable
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -18,11 +19,16 @@ class DadosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDadosBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initEvent()
+
+        // Inicializar eventos
+        binding.txtResultado.visibility = View.INVISIBLE
+        binding.imageButton.setOnClickListener {
+            animateDiceRoll()
+        }
 
         // Botón para regresar al MainActivity
         binding.buttonBackMain.setOnClickListener {
-            finish() // Finaliza DadosActivity y regresa al MainActivity
+            finish()
         }
 
         // Botón para abrir ConfigActivity
@@ -32,27 +38,30 @@ class DadosActivity : AppCompatActivity() {
         }
     }
 
-    private fun initEvent() {
-        binding.txtResultado.visibility = View.INVISIBLE
-        binding.imageButton.setOnClickListener {
-            binding.txtResultado.visibility = View.VISIBLE
-            game()
-        }
+    // Animación del vaso
+    private fun animateDiceRoll() {
+        val animator = ObjectAnimator.ofFloat(binding.imageButton, "translationY", -50f, 50f)
+        animator.duration = 500
+        animator.repeatCount = 3
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.start()
+
+        animator.addListener(object : android.animation.AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: android.animation.Animator) {
+                super.onAnimationEnd(animation)
+                scheduleRun() // Llamamos al método para continuar con el lanzamiento de los dados
+            }
+        })
     }
 
-    private fun game() {
-        scheduleRun()
-    }
-
+    // Lógica del juego
     private fun scheduleRun() {
         val schedulerExecutor = Executors.newSingleThreadScheduledExecutor()
         val msc = 1000L
 
         for (i in 1..5) {
             schedulerExecutor.schedule(
-                {
-                    throwDadoInTime()
-                },
+                { throwDadoInTime() },
                 msc * i, TimeUnit.MILLISECONDS
             )
         }
@@ -74,7 +83,7 @@ class DadosActivity : AppCompatActivity() {
 
         sum = numDados.sum()
 
-        for (i in 0..2)
+        for (i in imageViews.indices)
             selectView(imageViews[i], numDados[i])
     }
 
@@ -91,5 +100,10 @@ class DadosActivity : AppCompatActivity() {
 
     private fun viewResult() {
         binding.txtResultado.text = sum.toString()
+
+        // Enviar el resultado a ChistesActivity
+        val intent = Intent(this, ChistesActivity::class.java)
+        intent.putExtra("resultadoDados", sum)
+        startActivity(intent)
     }
 }

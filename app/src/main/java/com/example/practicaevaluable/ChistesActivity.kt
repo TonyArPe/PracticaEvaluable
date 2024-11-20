@@ -2,11 +2,7 @@ package com.example.practicaevaluable
 
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
-import android.widget.Button
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.practicaevaluable.databinding.ActivityChistesBinding
 import java.util.Locale
 
@@ -23,7 +19,15 @@ class ChistesActivity : AppCompatActivity() {
         "¿Por qué los esqueletos no pelean entre ellos? Porque no tienen agallas.",
         "¿Qué hace una vaca con los ojos cerrados? Leche concentrada.",
         "¿Por qué el fantasma no fue a la fiesta? Porque no tenía cuerpo.",
-        "¿Qué le dice una iguana a su hermana gemela? Somos iguanitas."
+        "¿Qué le dice una iguana a su hermana gemela? Somos iguanitas.",
+        "¿Qué hace un pez en una biblioteca? Nada.",
+        "¿Por qué las vacas no se tiran pedos en la iglesia? Porque sería un acto de mala educación.",
+        "¿Qué es un café muy fuerte? Uno que te da una buena tunda.",
+        "¿Qué hace un árbol en el ordenador? Se enraiza.",
+        "¿Por qué no podemos confiar en los árboles? Porque siempre te dejan plantado.",
+        "¿Qué le dice un jardinero a otro? Disfrutemos mientras podamos.",
+        "¿Por qué las galletas no hablan? Porque se desmigarían.",
+        "¿Cómo se despide una tienda de campaña? ¡Hasta la próxima acampada!"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,20 +39,19 @@ class ChistesActivity : AppCompatActivity() {
         tts = TextToSpeech(this) { status ->
             if (status == TextToSpeech.SUCCESS) {
                 tts.language = Locale.getDefault()
+                reproducirChiste()
             }
         }
 
-        // Configurar el botón para generar chistes
-        binding.buttonChisteAleatorio.setOnClickListener {
-            val chisteAleatorio = chistes.random()
-            binding.textViewChiste.text = chisteAleatorio
-            tts.speak(chisteAleatorio, TextToSpeech.QUEUE_FLUSH, null, "")
-        }
-
-        val backButton = findViewById<Button>(R.id.backButton)
-        backButton.setOnClickListener {
+        binding.backButton.setOnClickListener {
             finish()
         }
+    }
+
+    private fun reproducirChiste() {
+        val chisteAleatorio = chistes.random()
+        binding.textViewChiste.text = chisteAleatorio
+        tts.speak(chisteAleatorio, TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
     override fun onDestroy() {
@@ -57,4 +60,3 @@ class ChistesActivity : AppCompatActivity() {
         super.onDestroy()
     }
 }
-
